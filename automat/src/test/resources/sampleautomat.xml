@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+   Definicja automatu oraz danych wejściowych dla zdefioniowanego automatu
+-->
+
+<automat className="org.imivic.automats.core.BaseAutomat">
+    <!-- główna klasa automatu -->
+    <!-- klasa reprezentująca alfabet automatu oraz alfabet -->
+    <alphabet>
+        <symbols>
+        <symbol name="0" className="org.imivic.automats.alphabets.Letter"/>
+        <symbol name="1" className="org.imivic.automats.alphabets.Letter"/>
+        </symbols>
+    </alphabet>
+    <!-- klasa reprezentująca pojedynczy stan automatu oraz lista definicji stanów automatu-->
+    <!-- todo, czy każdy stan automatu może być powiązany z inną klasą? Warto to rozważyć -->
+    <states>
+        <state name="s1" className="org.imivic.automats.states.Simple"/>
+        <state name="s2" className="org.imivic.automats.states.Simple"/>
+        <state name="s3" className="org.imivic.automats.states.Simple"/>
+    </states>
+    
+        <startState name="s1"/>
+ 
+     <finalStates>
+         <state name="s3"/>
+     </finalStates>
+      <!-- definicja tabeli przejść lub grafu -->
+    <function className="org.imivic.automats.functions.TabFunction">
+        <!-- zapis grafu (krótszy, ale trzeba wiedzieć jakie ma znaczenie) lub zapis states. Graf ma wyższy priorytet -->
+            <graf>
+                s1->(0,s2)(1,s1);s2->(0,s2)(1,s3);s3->(0,s3);(1,s3)
+            </graf>
+        <states>
+        <state name="s1">
+            <!-- dla aktualnego stanu=0, gdy wchodzi symbol=0, automat przechodzi w stan równy 1, gdy wchodzi 1, automat przechodzi w 0 -->
+            <entries>
+            <entry symbol="0" state="s2"/>
+            <entry symbol="1" state="s1"/>
+            </entries>
+        </state>
+        <state name="s2">
+            <entries>
+            <entry symbol="0" state="s2"/>
+            <entry symbol="1" state="s3"/>
+            </entries>
+        </state>
+        <state name="s3">
+            <entries>
+            <entry symbol="0" state="s3"/>
+            <entry symbol="1" state="s3"/>
+            </entries>
+        </state>
+        </states>
+    </function>
+</automat>
